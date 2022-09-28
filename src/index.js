@@ -15,16 +15,13 @@ function searchCountry(e) {
     e.preventDefault();
     const searchBox = inputEl.value.trim();
 
-
     if (searchBox === '') {
         countryListEl.innerHTML = ""
-        return
     } else {
     fetchCountries(searchBox).then(data => {
         if (data.length > 10){
             Notiflix.Notify.info('Too many matches found. Please enter a more specific name.')
             countryListEl.innerHTML = ""
-            return
         }
         else if (data.length >= 2 && data.length <= 10) {
             renderCountryList(data);
@@ -45,7 +42,7 @@ function searchCountry(e) {
     
 function renderCountryList(countries) {
     const markup = countries.map(({ flags, name }) => {
-        return `<li><img src="${flags.svg}" alt='${name.official}' width="40" hight="40"><span class="country-text">${name.official}</span></li>`
+        return `<li><img src="${flags.svg}" alt='${name.official}' width="40"><span class="country-text">${name.official}</span></li>`
     }).join("");
 
     countryListEl.insertAdjacentHTML('afterbegin',markup);
@@ -53,7 +50,7 @@ function renderCountryList(countries) {
 
 function renderCountryArr(countries) {
     const markup = countries.map(({ flags, name, capital, population, languages}) => {
-        return `<li><img src="${flags.svg}" alt="${name.official}" width="30" hight="20"><span class="country-title"><b>${name.official}</b></span></li>
+        return `<li><img src="${flags.svg}" alt="${name.official}" width="30"><span class="country-title"><b>${name.official}</b></span></li>
         <li><b>Capital:</b> ${capital}</li>
         <li><b>Population:</b> ${population}</li>
         <li><b>Languages:</b> ${Object.values(languages)} </li>`;
